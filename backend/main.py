@@ -21,3 +21,5 @@ def read_pdf(file_path):
     except Exception as e:
         print(f"Error reading PDF file: {e}")
     return text
+
+print("hello world")
