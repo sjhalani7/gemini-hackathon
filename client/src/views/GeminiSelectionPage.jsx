@@ -1,6 +1,25 @@
+import GeminiSelection from "../components/GeminiSelection"
+
 const GeminiSelectionPage = () => {
   return (
-    <div>GeminiSelectionPage</div>
+    <div className="flex flex-col justify-center items-center h-full w-full">
+      <p className="selection-title mb-5">Choose an option</p>
+      <div className="flex flex-row">
+        <GeminiSelection 
+          title="Gemini Advisor"
+          iconName="event_note"
+          desc="Create schedules based on upcoming course availability"
+          path="/gemini-advisor"
+        />
+
+        <GeminiSelection 
+          title="Gemini Academic"
+          iconName="school"
+          desc="Chat with Gemini to ask questions about class material"
+          path="/course-selection"
+        />
+      </div>
+    </div>
   )
 }
 

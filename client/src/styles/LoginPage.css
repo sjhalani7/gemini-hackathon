@@ -1,8 +1,8 @@
-p {
+.home-container p {
   font-size: 24px;
 }
 
-h1 {
+.home-container h1 {
   font-size: 48px;
   color: #7371FC;
 }

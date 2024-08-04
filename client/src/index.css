@@ -17,3 +17,7 @@ html, body, #root {
 .container {
   height: 100%;
 }
+
+.selection-title {
+  font-size: 24px;
+}

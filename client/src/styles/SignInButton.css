@@ -1,8 +1,8 @@
-button {
+.sign-in-button {
   background-color: #eeeeee;
   font-size: 20px;
 }
 
-button:hover {
+.sign-in-button:hover {
   background-color: #dddddd;
 }

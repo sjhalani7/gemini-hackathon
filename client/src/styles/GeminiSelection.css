@@ -1,0 +1,17 @@
+.gemini-selection-container {
+  display: block;
+  font-size: 16px !important;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  height: 300px;
+}
+
+.gemini-selection-container:hover {
+  background-color: #eeeeee;
+}
+
+.gemini-icon {
+  display: block;
+  font-size: 75px;
+}
