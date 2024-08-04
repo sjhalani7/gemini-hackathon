@@ -4,9 +4,15 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../auth/firebaseConfig';
 import SignInButton from '../components/SignInButton';
 import SignOutButton from '../components/SignOutButton';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [user] = useAuthState(auth); 
+  const navigate = useNavigate();
+
+  if (user) {
+    navigate("/gemini-selection");
+  }
   
   return (
     <div className='flex flex-col justify-center container'>
