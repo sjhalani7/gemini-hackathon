@@ -10,7 +10,7 @@ const LoginPage = () => {
   
   return (
     <div className='flex flex-col justify-center container'>
-      <div className="home-container m-20">
+      <div className="home-container m-40">
         <h1>Gem.edu</h1>
         <p>Your personal teacher and advisor outside of the classroom.</p>
         {user ? <SignOutButton /> : <SignInButton />}
