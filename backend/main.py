@@ -32,7 +32,7 @@ def init_prompt_llm(prompt):
     ]
     chat = model.start_chat(history=history)
     return chat
-print(init_prompt_llm("hello"))
+
 def send_question_to_model(chat_session, query):
     response = chat_session.send_message(query)
     return(response.text)
@@ -48,7 +48,6 @@ def read_pdf(file_path):
         print(f"Error reading PDF file: {e}")
     return text
 
-#print(send_question_to_model(init_prompt_llm(create_prompt("184 Final Report.pdf")),"What was the project on?"))
 
 @app.route('/initialize', methods=['POST'])
 def initialize_model():
