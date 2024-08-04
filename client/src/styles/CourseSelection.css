@@ -1,0 +1,35 @@
+.course-selection-container input {
+  border: solid black;
+  border-radius: 10px;
+}
+
+.course-selection-container button {
+  border-radius: 10px;
+  text-align: left;
+  background-color: #eeeeee;
+}
+
+.course-selection-container button:hover {
+  background-color: #dddddd;
+}
+
+.course-list {
+  overflow: scroll;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-box {
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem; /* Adjust padding to make room for the icon */
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px; /* Adjust to your needs */
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevents the icon from blocking input clicks */
+}
