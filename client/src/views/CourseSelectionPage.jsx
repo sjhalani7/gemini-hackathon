@@ -33,7 +33,7 @@ const CourseSelectionPage = () => {
   );
 
   return (
-    <div className="course-selection-container flex flex-col justify-center items-center h-full w-full">
+    <div className="course-selection-container flex flex-col justify-start items-center h-full w-full">
       <p className="selection-title mt-24 mb-2">Select a course</p>
       <p className="mb-2">Term: Fall 2024</p>
       <div className="input-container w-1/2 relative mb-2">

@@ -1,20 +1,18 @@
 .course-selection-container input {
-  border: solid black 1px;
-  border-radius: 10px;
+
 }
 
 .course-selection-container button {
   border-radius: 10px;
   text-align: left;
-  background-color: #eeeeee;
 }
 
 .course-selection-container button:hover {
-  background-color: #dddddd;
+  background-color: #eeeeee;
 }
 
 .course-list {
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .input-container {
@@ -22,8 +20,11 @@
 }
 
 .input-box {
+  background-color: #eeeeee;
+  border-radius: 10px;
   width: 100%;
-  padding: 0.75rem 0.75rem 0.75rem 2.5rem; /* Adjust padding to make room for the icon */
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  outline-width: 0
 }
 
 .search-icon {
