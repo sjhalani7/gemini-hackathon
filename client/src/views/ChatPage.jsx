@@ -1,6 +1,10 @@
+import ChatSection from "../components/ChatSection"
+
 const ChatPage = () => {
   return (
-    <div>ChatPage</div>
+    <div className="w-full h-full">
+      <ChatSection />
+    </div>
   )
 }
 

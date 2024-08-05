@@ -1,0 +1,44 @@
+.chat-input-container {
+  background-color: #eeeeee;
+  border-radius: 20px;
+}
+
+.chat-input {
+  background-color: #eeeeee;
+  outline-width: 0;
+}
+
+.send-button {
+  background-color: #7371FC;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+}
+
+.send-button:hover {
+  background-color: #5755f9;
+}
+
+.send-icon {
+  font-size: 22.5px;
+  color: white;
+}
+
+.message {
+  border-radius: 10px;
+  max-width: 67%;
+}
+
+.user-message {
+  justify-content: end;
+}
+
+.user-message p {
+  background-color: #D8D8FF;
+  text-align: end;
+  justify-content: end;
+}
+
+.bot-message p {
+  background-color: #eeeeee;
+}
