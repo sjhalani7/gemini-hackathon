@@ -1,5 +1,5 @@
 backend/config.py
 *.pdf
 config.py
-/backend/flask_session/
-/backend/__pycache__/
+flask_session/
+__pycache__/
