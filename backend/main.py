@@ -1,13 +1,11 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import config
 import google.generativeai as genai
 import fitz
-from flask import Flask, request, jsonify, session
-from flask_session import Session
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'supersecretkey'
-app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
 
 API_KEY = config.API_KEY
 genai.configure(api_key=API_KEY)
@@ -28,14 +26,13 @@ def init_prompt_llm(prompt):
     history = [
         {"role": "user",
          "parts": f"{prompt}"},
-
     ]
     chat = model.start_chat(history=history)
     return chat
 
 def send_question_to_model(chat_session, query):
     response = chat_session.send_message(query)
-    return(response.text)
+    return response.text
 
 def read_pdf(file_path):
     text = ""
@@ -55,22 +52,25 @@ def initialize_model():
     prompt = create_prompt(path_to_file)
     chat = init_prompt_llm(prompt)
     chat_id = "abc1"
-    session['chat_id'] = chat_id
     chat_hist[chat_id] = chat
-    return jsonify({"message": "Model initialized successfully."})
-
+    print(f"Initialized chat with id: {chat_id}")
+    return jsonify({"chat_id": chat_id, "message": "Model initialized successfully."})
 
 @app.route('/ask', methods=['POST'])
 def ask_model():
-    if 'chat_id' not in session:
-        return jsonify({"error": "Model not initialized."}), 400
+    data = request.get_json()
+    print("Request Data:", data)
+    chat_id = data.get('chat_id')
+    query = data.get('query')
 
-    query = request.json.get('query')
+    if not chat_id or chat_id not in chat_hist:
+        print("Error: Chat session not found")
+        return jsonify({"error": "Chat session not found."}), 400
+
     if not query:
-        return jsonify({"error": "No queryy provided."}), 400
+        return jsonify({"error": "No query provided."}), 400
 
-    chat_id = session['chat_id']
-    chat = chat_hist[chat_id]
+    chat = chat_hist.get(chat_id)
     response = send_question_to_model(chat, query)
     return jsonify({"response": response})
 
