@@ -45,8 +45,10 @@ const CourseSelectionPage = () => {
     <div className="flex flex-col w-full h-full overflow-hidden">
       <Navbar backLink="/gemini-selection"/>
       <div className="course-selection-container flex flex-col justify-start items-center grow">
-        <p className="selection-title mt-16 mb-2">Select a course</p>
-        <p className="mb-2">Term: Fall 2024</p>
+        <div className="w-1/2 flex justify-between items-center mt-16 mb-2">
+        <p className="selection-title">Select a course</p>
+        <p>Term: Fall 2024</p>
+        </div>
         <div className="input-container w-1/2 relative mb-2">
           <input
             type="text"
