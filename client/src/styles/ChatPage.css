@@ -33,12 +33,12 @@
   justify-content: end;
 }
 
-.user-message p {
+.user-message .message {
   background-color: #D8D8FF;
   text-align: end;
   justify-content: end;
 }
 
-.bot-message p {
+.bot-message .message {
   background-color: #eeeeee;
 }

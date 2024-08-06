@@ -1,12 +1,15 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 const ChatMessage = ({ message }) => {
   const { text, userSent } = message;
   return (
     <div className={`flex w-full ${userSent ? 'user-message' : 'bot-message'}`}>
-      <p className={`message px-4 py-3 m-2`}>
-        {text}
-      </p>
+      <div className={`message px-4 py-3 m-2`}>
+        <ReactMarkdown>
+          {text}
+        </ReactMarkdown>
+      </div>
     </div>
   );
 };
