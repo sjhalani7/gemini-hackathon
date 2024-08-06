@@ -2,3 +2,4 @@ backend/config.py
 *.pdf
 config.py
 /backend/flask_session/
+/backend/__pycache__/
