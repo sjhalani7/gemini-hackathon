@@ -1,0 +1,25 @@
+.major-selection-container button {
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out, font-size 0.3s ease-in-out; /* Added transition */
+}
+
+.major-button:hover {
+  background-color: #D8D8FF;
+}
+
+.major-selection-container .selected {
+  background-color: #D8D8FF;
+}
+
+.next-button {
+  background-color: #7371FC;
+  color: white;
+}
+
+.next-button:hover {
+  background-color: #5755f9;
+}
+
+.next-icon {
+  font-size: 16px;
+}

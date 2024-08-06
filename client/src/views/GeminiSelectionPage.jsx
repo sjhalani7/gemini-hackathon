@@ -10,7 +10,7 @@ const GeminiSelectionPage = () => {
   if (!user) {
     navigate("/");
   }
-  
+
   return (
     <div className="flex flex-col justify-center items-center h-full w-full">
       <p className="selection-title mb-5">Choose an option</p>
@@ -19,7 +19,7 @@ const GeminiSelectionPage = () => {
           title="Gemini Advisor"
           iconName="event_note"
           desc="Create schedules based on upcoming course availability"
-          path="/gemini-advisor"
+          path="/major-selection"
         />
 
         <GeminiSelection 

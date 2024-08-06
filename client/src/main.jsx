@@ -9,6 +9,7 @@ import LoginPage from './views/LoginPage';
 import GeminiSelectionPage from './views/GeminiSelectionPage';
 import CourseSelectionPage from './views/CourseSelectionPage';
 import ChatPage from './views/ChatPage';
+import MajorSelectionPage from './views/MajorSelectionPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     path: "/chat",
     element: <ChatPage />,
   },
+  {
+    path: "/major-selection",
+    element: <MajorSelectionPage />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
