@@ -3,10 +3,10 @@ import Navbar from '../components/Navbar';
 import "../styles/MajorSelectionPage.css";
 import { useNavigate } from 'react-router-dom';
 
-const MajorSelectionPage = () => {
+const MinorSelectionPage = () => {
   const [selectedMajors, setSelectedMajors] = useState([]);
   const navigate = useNavigate();
-
+  
   const casMajors = [
     "Ancient Studies",
     "Anthropology",
@@ -90,10 +90,10 @@ const MajorSelectionPage = () => {
 
   return (
     <div className="flex flex-col w-full h-full overflow-hidden">
-      <Navbar backLink="/gemini-selection" />
+      <Navbar backLink="/major-selection" />
       <div className="major-selection-container flex flex-col justify-start items-center grow">
         <div className='w-2/3 flex mb-10'>
-          <p className="selection-title mt-16">Select your <strong>major(s)</strong></p>
+          <p className="selection-title mt-16">Select your <strong>minor(s)</strong>, if any</p>
         </div>
         <div className='w-2/3'>
           <div className='mb-10'>
@@ -109,17 +109,17 @@ const MajorSelectionPage = () => {
             <div>{renderMajorButtons(engineeringMajors)}</div>
           </div>
         </div>
-        {selectedMajors.length > 0 && <div className="w-2/3 flex flex-row justify-end">
+        <div className="w-2/3 flex flex-row justify-end">
           <button className='flex items-center next-button p-2' onClick={() => navigate("/minor-selection")}>
             <p>Next</p>
             <span className="material-symbols-outlined next-icon ml-1">
               arrow_forward_ios
             </span>
           </button>
-        </div>}
+        </div>
       </div>
     </div>
   );
 };
 
-export default MajorSelectionPage;
+export default MinorSelectionPage;

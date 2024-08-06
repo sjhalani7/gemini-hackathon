@@ -10,6 +10,7 @@ import GeminiSelectionPage from './views/GeminiSelectionPage';
 import CourseSelectionPage from './views/CourseSelectionPage';
 import ChatPage from './views/ChatPage';
 import MajorSelectionPage from './views/MajorSelectionPage';
+import MinorSelectionPage from './views/MinorSelectionPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/major-selection",
     element: <MajorSelectionPage />
+  },
+  {
+    path: "/minor-selection",
+    element: <MinorSelectionPage />
   }
 ]);
 
