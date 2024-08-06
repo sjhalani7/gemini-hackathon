@@ -1,8 +1,10 @@
 import ChatSection from "../components/ChatSection"
+import Navbar from "../components/Navbar"
 
 const ChatPage = () => {
   return (
-    <div className="w-full h-full">
+    <div className="flex flex-col w-full h-full">
+      <Navbar />
       <ChatSection />
     </div>
   )
