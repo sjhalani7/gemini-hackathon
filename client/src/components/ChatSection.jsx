@@ -1,23 +1,15 @@
 import { useState } from "react";
 import ChatConversation from "./ChatConversation"
 import ChatInput from "./ChatInput"
+import { initialize, sendQuery } from "../services/geminiService";
 
 const ChatSection = () => {
-  const [messages, setMessages] = useState([
-    { 
-      text: "What is a string?",
-      userSent: true 
-    },
-    { 
-      text: "A string consists of many characters. Its underlying structure is usually some type of list.",
-      userSent: false 
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
 
-  const handleSubmit = (inputValue) => {    
+  const handleSubmit = async (inputValue) => {    
     console.log("Submit clicked! Input: " + inputValue);
-    console.log("Messages: ", messages);
-
+  
+    // Immediately update the UI with the user's message
     const newMessages = [
       ...messages, 
       {
@@ -25,9 +17,21 @@ const ChatSection = () => {
         userSent: true
       }
     ];
-
     setMessages(newMessages);
-  }
+  
+    // Call the backend service and wait for the response
+    try {
+      const response = await sendQuery(inputValue);
+      // Add the response message to the state
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: response.response, userSent: false } // Adjust if response structure is different
+      ]);
+    } catch (error) {
+      console.error('Error sending query:', error);
+    }
+  };
+  
 
   return (
     <div className="flex flex-col justify-between items-center h-full p-2">

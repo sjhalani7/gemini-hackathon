@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "../styles/CourseSelection.css";
+import { useNavigate } from "react-router-dom";
+import { initialize } from "../services/geminiService";
 
 const CourseSelectionPage = () => {
   const [courses, setCourses] = useState([
@@ -23,6 +25,7 @@ const CourseSelectionPage = () => {
     "CSEN 171 - Programming Languages",
   ]);
   const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -31,6 +34,11 @@ const CourseSelectionPage = () => {
   const filteredCourses = courses.filter((course) =>
     course.toLowerCase().includes(inputValue.toLowerCase())
   );
+
+  const handleClick = () => {
+    navigate("/chat");
+    initialize();
+  }
 
   return (
     <div className="course-selection-container flex flex-col justify-start items-center h-full w-full">
@@ -48,7 +56,7 @@ const CourseSelectionPage = () => {
       </div>
       <div className="course-list flex flex-col w-1/2 mb-24">
         {filteredCourses.map((course, index) => (
-          <button key={index} className="course-item w-full p-2 mb-2">
+          <button key={index} className="course-item w-full p-2 mb-2" onClick={handleClick}>
             {course}
           </button>
         ))}
