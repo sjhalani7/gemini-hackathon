@@ -1,8 +1,10 @@
 .sign-in-button {
-  background-color: #eeeeee;
-  font-size: 20px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out, font-size 0.3s ease-in-out; /* Added transition */
 }
 
 .sign-in-button:hover {
-  background-color: #dddddd;
+  background-color: #4e4e4e;
 }
