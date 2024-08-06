@@ -1,14 +1,12 @@
-.course-selection-container input {
-
-}
-
 .course-selection-container button {
   border-radius: 10px;
   text-align: left;
+  transition: background-color 0.3s ease-in-out, font-size 0.3s ease-in-out; /* Added transition */
 }
 
 .course-selection-container button:hover {
   background-color: #D8D8FF;
+  font-size: 1.05em; /* Increase the text size on hover */
 }
 
 .course-list {
@@ -24,7 +22,7 @@
   border-radius: 10px;
   width: 100%;
   padding: 0.75rem 0.75rem 0.75rem 2.5rem;
-  outline-width: 0
+  outline-width: 0;
 }
 
 .search-icon {

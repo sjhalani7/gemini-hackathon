@@ -1,7 +1,8 @@
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import "../styles/GeminiSelection.css";
 
-const GeminiSelection = ( { title, iconName, desc, path } ) => {
+const GeminiSelection = ({ title, iconName, desc, path }) => {
   const navigate = useNavigate();
 
   return (
@@ -11,9 +12,16 @@ const GeminiSelection = ( { title, iconName, desc, path } ) => {
     >
       <p className="font-bold m-2">{title}</p>
       <span className="m-2 material-symbols-outlined gemini-icon">{iconName}</span>
-      <p className="m-2">{desc}</p>
+      <p className="m-2">
+        {desc.split('\n').map((line, index) => (
+          <React.Fragment key={index}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
+      </p>
     </button>
-  )
+  );
 }
 
-export default GeminiSelection
+export default GeminiSelection;

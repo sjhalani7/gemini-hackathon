@@ -5,13 +5,20 @@
   text-align: center;
   width: 300px;
   height: 300px;
+  transition: background-color 0.3s ease, font-size 0.3s ease;
 }
 
 .gemini-selection-container:hover {
   background-color: #D8D8FF;
+  font-size: 17px !important; /* Adjust as needed for the hover font size */
 }
 
 .gemini-icon {
   display: block;
   font-size: 75px;
+  transition: font-size 0.3s ease;
+}
+
+.gemini-selection-container:hover .gemini-icon {
+  font-size: 80px; /* Adjust as needed for the hover icon size */
 }
