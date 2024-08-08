@@ -1,5 +1,6 @@
 backend/config.py
 *.pdf
+*.json
 config.py
 flask_session/
 __pycache__/
