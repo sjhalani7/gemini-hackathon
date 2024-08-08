@@ -144,7 +144,15 @@ def return_chat_history():
         return jsonify({"error": "Chat session not found."}), 400
 
     chat = chat_hist[chat_id]
-    return(chat.history)
+
+    # Convert chat history to a list of dictionaries
+    history_serializable = []
+    for item in chat.history:
+        message_text = "".join([part.text for part in item.parts])
+        history_serializable.append({"role": item.role, "text": message_text})
+
+    return jsonify({"history": history_serializable})
+
 
 
 
