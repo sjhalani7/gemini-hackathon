@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../styles/ChatPage.css";
 
 const ChatInput = ( { handleSubmit } ) => {
   const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -25,6 +30,7 @@ const ChatInput = ( { handleSubmit } ) => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyPress}
+        ref={inputRef}
       />
       <button 
         className="flex justify-center items-center send-button"
