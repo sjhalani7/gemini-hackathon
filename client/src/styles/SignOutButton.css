@@ -1,7 +1,5 @@
 .sign-out-button {
-  border-bottom: #D8D8FF solid 1px;
-  border-right: #D8D8FF solid 1px;
-  border-left: #D8D8FF solid 1px;
+  border: #D8D8FF solid 1px;
 }
 
 .sign-out-button:hover p {

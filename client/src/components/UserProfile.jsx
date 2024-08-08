@@ -16,7 +16,7 @@ const UserProfile = () => {
     <div className='relative profile-section'>
         {user && (
           <div
-            className={`profile-container flex items-center cursor-pointer p-3 ${dropdownOpen && 'dropdown-open'}`}
+            className={`profile-container rounded flex items-center cursor-pointer p-3 ${dropdownOpen && 'dropdown-open'}`}
             onClick={handleProfileClick}
           >
             <span>{user.displayName}</span>
@@ -28,7 +28,7 @@ const UserProfile = () => {
           </div>
         )}
         {dropdownOpen && (
-          <div className='sign-out-button absolute right-0 w-full text-right'>
+          <div className='sign-out-button rounded absolute right-0 w-full text-right'>
             <SignOutButton />
           </div>
         )}
