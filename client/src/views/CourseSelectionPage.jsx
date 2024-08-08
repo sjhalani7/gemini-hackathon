@@ -37,8 +37,8 @@ const CourseSelectionPage = () => {
   );
 
   const handleClick = () => {
-    navigate("/chat");
-    initialize();
+    navigate("/tutor-chat");
+    initialize("tutor");
   }
 
   return (

@@ -19,7 +19,7 @@ const GeminiSelectionPage = () => {
           title="Gemini Advisor"
           iconName="event_note"
           desc="Create schedules based on upcoming course availability"
-          path="/major-selection"
+          path="/advisor-chat"
         />
 
         <GeminiSelection 

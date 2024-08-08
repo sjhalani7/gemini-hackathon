@@ -12,10 +12,10 @@ const api = axios.create({
   }
 });
 
-const initialize = async () => {
+const initialize = async (mode) => {
   try {
     console.log("Initializing...");
-    const response = await api.post("/initialize");
+    const response = await api.post("/initialize", { mode });
     chatId = response.data.chat_id; // Save the chat ID from the response
     console.log('Initialization Response:', response.data);
     console.log('Cookies after initialization:', document.cookie); // Log cookies

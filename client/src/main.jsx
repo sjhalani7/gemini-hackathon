@@ -8,9 +8,10 @@ import './index.css'
 import LoginPage from './views/LoginPage';
 import GeminiSelectionPage from './views/GeminiSelectionPage';
 import CourseSelectionPage from './views/CourseSelectionPage';
-import ChatPage from './views/ChatPage';
 import MajorSelectionPage from './views/MajorSelectionPage';
 import MinorSelectionPage from './views/MinorSelectionPage';
+import TutorChatPage from './views/TutorChatPage';
+import AdvisorChatPage from './views/AdvisorChatPage';
 
 const router = createBrowserRouter([
   {
@@ -26,8 +27,12 @@ const router = createBrowserRouter([
     element: <CourseSelectionPage />,
   },
   {
-    path: "/chat",
-    element: <ChatPage />,
+    path: "/tutor-chat",
+    element: <TutorChatPage />,
+  },
+  {
+    path: "/advisor-chat",
+    element: <AdvisorChatPage />,
   },
   {
     path: "/major-selection",

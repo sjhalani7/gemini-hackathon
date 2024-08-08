@@ -1,13 +1,13 @@
 import ChatSection from "../components/ChatSection"
 import Navbar from "../components/Navbar"
 
-const ChatPage = () => {
+const AdvisorChatPage = () => {
   return (
     <div className="flex flex-col w-full h-full">
-      <Navbar backLink="/course-selection"/>
-      <ChatSection />
+      <Navbar backLink="/gemini-selection"/>
+      <ChatSection mode="advisor"/>
     </div>
   )
 }
 
-export default ChatPage
+export default AdvisorChatPage
