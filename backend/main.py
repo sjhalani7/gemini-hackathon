@@ -102,8 +102,13 @@ def read_pdf(file_path):
 
 @app.route('/initialize', methods=['POST'])
 def initialize_model():
+    data = request.get_json()
+    mode = data.get("mode")
+    if not mode:
+        print("Error: Mode not found")
+        return jsonify({"error": "Mode not provided"}), 400
     path_to_file = "files/courses_offered.pdf"  # Assuming the file is already in the backend
-    prompt = create_prompt(path_to_file, 'advisor')
+    prompt = create_prompt(path_to_file, mode)
     chat = init_prompt_llm(prompt)
     chat_id = "abc1"
     chat_hist[chat_id] = chat
@@ -127,6 +132,20 @@ def ask_model():
     chat = chat_hist.get(chat_id)
     response = send_question_to_model(chat, query)
     return jsonify({"response": response})
+
+@app.route('/chat-history', methods=['POST'])
+def return_chat_history():
+    data = request.get_json()
+    print("Request Data:", data)
+    chat_id = data.get('chat_id')
+
+    if not chat_id or chat_id not in chat_hist:
+        print("Error: Chat session not found")
+        return jsonify({"error": "Chat session not found."}), 400
+
+    chat = chat_hist[chat_id]
+    return(chat.history)
+
 
 
 # if __name__ == '__main__':
