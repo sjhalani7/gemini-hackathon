@@ -10,7 +10,7 @@ const BackButton = ( { link } ) => {
   }
   
   return (
-    <button className='flex items-center back-button' onClick={handleClick}>
+    <button className='flex items-center back-button p-3' onClick={handleClick}>
       <span class="back-icon material-symbols-outlined mx-1">
         arrow_back_ios
       </span>

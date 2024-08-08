@@ -1,0 +1,7 @@
+.profile-container:hover {
+  text-decoration: underline;
+}
+
+.profile-section .dropdown-open {
+  background-color: #D8D8FF;
+}

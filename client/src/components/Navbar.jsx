@@ -1,14 +1,14 @@
-import React from 'react'
-import SignOutButton from './SignOutButton'
-import BackButton from './BackButton'
+import React, { useState } from 'react';
+import BackButton from './BackButton';
+import UserProfile from './UserProfile';
 
-const Navbar = ( { backLink }) => {
+const Navbar = ({ backLink }) => {
   return (
-    <div className='flex justify-between items-center p-4'>
-      <BackButton link={backLink}/>
-      <SignOutButton />
+    <div className='flex justify-between items-center relative'>
+      <BackButton link={backLink} />
+      <UserProfile />
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

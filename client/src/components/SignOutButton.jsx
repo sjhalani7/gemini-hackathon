@@ -12,7 +12,12 @@ const SignOutButton = () => {
   }
 
   return auth.currentUser && (
-    <button onClick={handleClick}>Sign Out</button>
+    <button className="flex items-center justify-end w-full text-right p-2" onClick={handleClick}>
+      <p>Sign Out</p>
+      <span class="material-symbols-outlined ml-2">
+        logout
+      </span>
+    </button>
   );
 };
 
