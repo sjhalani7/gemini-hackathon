@@ -5,6 +5,7 @@ import { initialize, sendQuery } from "../services/geminiService";
 
 const ChatSection = ( { mode } ) => {
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
   let initialSetupDone = false;
 
   useEffect(() => {
@@ -31,6 +32,8 @@ const ChatSection = ( { mode } ) => {
       }
     ];
     setMessages(newMessages);
+
+    setLoading(true);
   
     // Call the backend service and wait for the response
     try {
@@ -43,11 +46,13 @@ const ChatSection = ( { mode } ) => {
     } catch (error) {
       console.error('Error sending query:', error);
     }
+
+    setLoading(false);
   };
 
   return (
     <div className="flex flex-col justify-between items-center h-full p-2 overflow-hidden">
-      <ChatConversation messages={messages}/>
+      <ChatConversation messages={messages} loading={loading}/>
       <ChatInput handleSubmit={handleSubmit}/>
     </div>
   )
