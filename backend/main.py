@@ -133,7 +133,7 @@ def ask_model():
     response = send_question_to_model(chat, query)
     return jsonify({"response": response})
 
-@app.route('/chat-history', methods=['POST'])
+@app.route('/chat-history', methods=['GET'])
 def return_chat_history():
     data = request.get_json()
     print("Request Data:", data)
