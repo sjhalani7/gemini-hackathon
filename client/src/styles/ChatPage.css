@@ -56,3 +56,11 @@
 .new-chat-button:hover {
   background-color: #5755f9;
 }
+
+.chat-session-button:hover {
+  background-color: #D9D9D9;
+}
+
+.chat-selected {
+  background-color: #D9D9D9;
+}

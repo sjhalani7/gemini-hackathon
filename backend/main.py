@@ -104,13 +104,15 @@ def read_pdf(file_path):
 def initialize_model():
     data = request.get_json()
     mode = data.get("mode")
+    chat_id = data.get("chat_id")
+
     if not mode:
         print("Error: Mode not found")
         return jsonify({"error": "Mode not provided"}), 400
+    
     path_to_file = "files/courses_offered.pdf"  # Assuming the file is already in the backend
     prompt = create_prompt(path_to_file, mode)
     chat = init_prompt_llm(prompt)
-    chat_id = "abc1"
     chat_hist[chat_id] = chat
     print(f"Initialized chat with id: {chat_id}")
     return jsonify({"chat_id": chat_id, "message": "Model initialized successfully."})
@@ -156,5 +158,5 @@ def return_chat_history():
 
 
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)

@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const baseURL = "http://127.0.0.1:5000";
-let chatId = "abc1"; // Initialize chatId to store the chat session id
 
 const api = axios.create({
   baseURL: baseURL,
@@ -12,11 +11,13 @@ const api = axios.create({
   }
 });
 
-const initialize = async (mode) => {
+const initialize = async (mode, chat_id) => {
   try {
     console.log("Initializing...");
-    const response = await api.post("/initialize", { mode });
-    chatId = response.data.chat_id; // Save the chat ID from the response
+    console.log("Mode: ", mode);
+    console.log("Chat id: ", chat_id);
+
+    const response = await api.post("/initialize", { mode, chat_id });
     console.log('Initialization Response:', response.data);
     console.log('Cookies after initialization:', document.cookie); // Log cookies
   } catch (error) {
@@ -24,19 +25,19 @@ const initialize = async (mode) => {
   }
 };
 
-const sendQuery = async (query) => {
+const sendQuery = async (query, chat_id) => {
   try {
-    if (!chatId) {
+    if (chat_id === null) {
       console.error('Error: Chat ID is not initialized.');
       return;
     }
     
     console.log("Sending query...");
+    console.log("Chat id: ", chat_id);
     console.log("Query:", query);
 
-    const response = await api.post("/ask", { chat_id: chatId, query });
+    const response = await api.post("/ask", { chat_id, query });
     console.log('Query Response:', response.data);
-    console.log('Cookies after sending query:', document.cookie); // Log cookies
 
     return response.data; // Return the response data
 
