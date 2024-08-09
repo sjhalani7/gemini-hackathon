@@ -5,6 +5,7 @@ import google.generativeai as genai
 import fitz
 import firebase
 import json
+import os
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
@@ -56,7 +57,15 @@ def create_prompt(path_to_file, mode='tutor'):
                 Please begin by acknowledging that you have received the course information and are ready to assist with any questions regarding course planning.
                 """
     else:
-        material_text = f"{read_pdf(path_to_file)}"
+        material_text = ""
+        file_names = os.listdir(path_to_file)
+        i = 1
+        for filename in file_names:
+            material_text += f"""
+            Here is the text for Lecture {i}\n: {read_pdf(f"{path_to_file}/{filename}")}
+            """
+            i+=1
+
         initial_prompt = f"""
                     You are an advanced language model serving as a virtual assistant for professors during office hours. You have been provided with the following material which includes lecture slides, notes, and other educational content:
 
@@ -121,7 +130,10 @@ def initialize_model():
         return jsonify({"error": "Mode not provided"}), 400
     
     if chat_id not in chat_hist:
-        path_to_file = "files/courses_offered.pdf"  # Assuming the file is already in the backend
+        if mode == 'advisor':
+            path_to_file = "files/courses_offered.pdf"  # Assuming the file is already in the backend
+        else:
+            path_to_file = "files/CSCI-183" #TODO: fix this logic
         prompt = create_prompt(path_to_file, mode)
         chat_session = init_prompt_llm(prompt)
         chat_hist[chat_id] = chat_session
