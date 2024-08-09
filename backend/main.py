@@ -3,6 +3,8 @@ from flask_cors import CORS
 import config
 import google.generativeai as genai
 import fitz
+import firebase
+import json
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
@@ -101,6 +103,12 @@ def read_pdf(file_path):
         print(f"Error reading PDF file: {e}")
     return text
 
+def process_history(chat_session_history_obj):
+    history_serializable = []
+    for item in chat_session_history_obj:
+        message_text = "".join([part.text for part in item.parts])
+        history_serializable.append({"role": item.role, "text": message_text})
+    return jsonify({"history": history_serializable}).get_data(as_text=True)
 
 @app.route('/initialize', methods=['POST'])
 def initialize_model():
@@ -115,9 +123,11 @@ def initialize_model():
     if chat_id not in chat_hist:
         path_to_file = "files/courses_offered.pdf"  # Assuming the file is already in the backend
         prompt = create_prompt(path_to_file, mode)
-        chat = init_prompt_llm(prompt)
-        chat_hist[chat_id] = chat
+        chat_session = init_prompt_llm(prompt)
+        chat_hist[chat_id] = chat_session
         print(f"Initialized chat with id: {chat_id}")
+
+        firebase.add_id_to_db(str(chat_id))
         return jsonify({"chat_id": chat_id, "message": "Model initialized successfully."})
     else:
         print(f"Chat already initialized with id: {chat_id}")
@@ -137,8 +147,10 @@ def ask_model():
     if not query:
         return jsonify({"error": "No query provided."}), 400
 
-    chat = chat_hist.get(chat_id)
-    response = send_question_to_model(chat, query)
+    chat_session = chat_hist.get(chat_id)
+    response = send_question_to_model(chat_session, query)
+
+    firebase.update_history(str(chat_id), process_history(chat_session.history))
     return jsonify({"response": response})
 
 @app.route('/chat-history', methods=['GET'])
@@ -151,15 +163,7 @@ def return_chat_history():
         print("Error: Chat session not found")
         return jsonify({"error": "Chat session not found."}), 400
 
-    chat = chat_hist[chat_id]
-
-    # Convert chat history to a list of dictionaries
-    history_serializable = []
-    for item in chat.history:
-        message_text = "".join([part.text for part in item.parts])
-        history_serializable.append({"role": item.role, "text": message_text})
-
-    return jsonify({"history": history_serializable})
+    return jsonify(firebase.get_data_from_db(str(chat_id)))
 
 @app.route('/next-id', methods=['GET'])
 def return_next_id():
