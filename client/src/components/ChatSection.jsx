@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ChatConversation from "./ChatConversation";
 import ChatInput from "./ChatInput";
-import { initialize, sendQuery } from "../services/geminiService";
+import { getChatHistory, initialize, sendQuery } from "../services/geminiService";
 
 const ChatSection = ({ messages, setMessages, mode, chatId, setInitialText }) => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,27 @@ const ChatSection = ({ messages, setMessages, mode, chatId, setInitialText }) =>
       if (!initialSetupDone) {
         initialSetupDone = true;
         await initialize(mode, chatId);
-        await handleSubmit("Hello, what can you help me with?");
+        const response = await getChatHistory(chatId);
+        const chatHistory = response.history;
+        console.log("Chat history: ", chatHistory);
+        if (chatHistory.length === 1) {
+          await handleSubmit("Hello, what can you help me with?");
+        } else {
+          // Add chat history to messages
+          const historyMessages = [];
+          for (let i = 1; i < chatHistory.length; i++) {
+            const chat = chatHistory[i];
+            const userSent = chat.role === "user";
+            const text = chat.text;
+
+            historyMessages.push({
+              text: text,
+              userSent: userSent,
+            });
+          }
+
+          setMessages(historyMessages);
+        }
       }
     };
 

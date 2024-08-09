@@ -28,7 +28,7 @@ const ChatMessage = ({ message }) => {
         <img
           src={user.photoURL}
           alt="Profile"
-          className='w-8 h-8 rounded-full'
+          className='w-8 h-8 rounded-full mr-3'
         />
       }
     </div>

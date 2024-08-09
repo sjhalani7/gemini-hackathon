@@ -43,7 +43,7 @@ const AdvisorChatPage = () => {
       />
       <div className="flex flex-col w-full h-full">
         <Navbar backLink="/gemini-selection"/>
-        <ChatSection messages={messages} setMessages={setMessages} mode="advisor" chatId={chatId} setInitialText={setInitialText}/>
+        <ChatSection messages={messages} setMessages={setMessages} mode="advisor" chatId={currentChatId} setInitialText={setInitialText}/>
       </div>
     </div>
   )

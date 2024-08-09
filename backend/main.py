@@ -110,12 +110,16 @@ def initialize_model():
         print("Error: Mode not found")
         return jsonify({"error": "Mode not provided"}), 400
     
-    path_to_file = "files/courses_offered.pdf"  # Assuming the file is already in the backend
-    prompt = create_prompt(path_to_file, mode)
-    chat = init_prompt_llm(prompt)
-    chat_hist[chat_id] = chat
-    print(f"Initialized chat with id: {chat_id}")
-    return jsonify({"chat_id": chat_id, "message": "Model initialized successfully."})
+    if chat_id not in chat_hist:
+        path_to_file = "files/courses_offered.pdf"  # Assuming the file is already in the backend
+        prompt = create_prompt(path_to_file, mode)
+        chat = init_prompt_llm(prompt)
+        chat_hist[chat_id] = chat
+        print(f"Initialized chat with id: {chat_id}")
+        return jsonify({"chat_id": chat_id, "message": "Model initialized successfully."})
+    else:
+        print(f"Chat already initialized with id: {chat_id}")
+        return jsonify({"chat_id": chat_id, "message": "Model already initialized."})
 
 @app.route('/ask', methods=['POST'])
 def ask_model():
@@ -137,9 +141,9 @@ def ask_model():
 
 @app.route('/chat-history', methods=['GET'])
 def return_chat_history():
-    data = request.get_json()
-    print("Request Data:", data)
-    chat_id = data.get('chat_id')
+    chat_id = request.args.get('chat_id')
+    chat_id = int(chat_id)
+    print("Chat id: ", chat_id)
 
     if not chat_id or chat_id not in chat_hist:
         print("Error: Chat session not found")
@@ -154,6 +158,7 @@ def return_chat_history():
         history_serializable.append({"role": item.role, "text": message_text})
 
     return jsonify({"history": history_serializable})
+
 
 
 

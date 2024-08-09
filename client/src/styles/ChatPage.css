@@ -44,7 +44,7 @@
 
 .sidebar {
   background-color: #eeeeee;
-  width: 20%;
+  width: 15%;
 }
 
 .new-chat-button {
@@ -55,6 +55,12 @@
 
 .new-chat-button:hover {
   background-color: #5755f9;
+}
+
+.chat-session-button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .chat-session-button:hover {
