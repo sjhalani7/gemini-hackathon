@@ -11,6 +11,8 @@ API_KEY = config.API_KEY
 genai.configure(api_key=API_KEY)
 chat_hist = {}
 
+next_id = 0
+
 model = genai.GenerativeModel('gemini-1.5-flash')
 major_reqs = {
     'Computer Science': "files/CS checklist.pdf",
@@ -159,8 +161,11 @@ def return_chat_history():
 
     return jsonify({"history": history_serializable})
 
-
-
+@app.route('/next-id', methods=['GET'])
+def return_next_id():
+    global next_id
+    next_id += 1
+    return jsonify(next_id)
 
 
 if __name__ == '__main__':

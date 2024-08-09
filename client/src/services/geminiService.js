@@ -59,9 +59,18 @@ const getChatHistory = async (chat_id) => {
 
   } catch (error) {
     console.error('Error making GET request:', error.response ? error.response.data : error.message);
-    throw error; // Re-throw the error so it can be caught in handleSubmit
+    throw error;
   }
 };
+
+const getNextId = async() => {
+  try {
+    const response = await api.get('/next-id');
+  } catch (error) {
+    console.error('Error making GET request:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+}
 
 
 
