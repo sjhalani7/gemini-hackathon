@@ -2,12 +2,22 @@ import { useState } from "react"
 import ChatSection from "../components/ChatSection"
 import ChatSidebar from "../components/ChatSidebar"
 import Navbar from "../components/Navbar"
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../auth/firebaseConfig';
+import { useNavigate } from "react-router-dom";
 
 const TutorChatPage = () => {
   const [messages, setMessages] = useState([]);
   const [currentChatId, setCurrentChatId] = useState(100);
   const [chats, setChats] = useState([{ id: 100, text: "New Chat" }]);
   const [chatId, setChatId] = useState(100);
+
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  if (!user) {
+    navigate("/");
+  }
 
   const startNewChat = () => {
     const prevChatId = chatId;

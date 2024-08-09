@@ -3,6 +3,8 @@ import "../styles/CourseSelection.css";
 import { useNavigate } from "react-router-dom";
 import { initialize } from "../services/geminiService";
 import Navbar from "../components/Navbar";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../auth/firebaseConfig';
 
 const CourseSelectionPage = () => {
   const [courses, setCourses] = useState([
@@ -27,6 +29,11 @@ const CourseSelectionPage = () => {
   ]);
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
+
+  const [user] = useAuthState(auth);
+  if (!user) {
+    navigate("/");
+  }
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
