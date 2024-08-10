@@ -11,14 +11,18 @@ const ChatSection = ({ messages, setMessages, mode, chatId, setInitialText }) =>
     const initialSetup = async () => {
       if (!initialSetupDone) {
         initialSetupDone = true;
+
         await initialize(mode, chatId);
-        const response = await getChatHistory(chatId);
-        const chatHistory = response.history;
-        console.log("Chat history: ", chatHistory);
-        if (chatHistory.length === 1) {
+
+        const response = await getChatHistory(chatId, mode);
+        console.log("Response: ", response);
+        const history = response.history;
+        
+        if (history === 'NULL') {
           await handleSubmit("Hello, what can you help me with?");
         } else {
           // Add chat history to messages
+          const chatHistory = JSON.parse(history).history;
           const historyMessages = [];
           for (let i = 1; i < chatHistory.length; i++) {
             const chat = chatHistory[i];

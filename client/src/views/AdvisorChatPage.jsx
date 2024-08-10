@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ChatSection from "../components/ChatSection"
 import ChatSidebar from "../components/ChatSidebar"
 import Navbar from "../components/Navbar"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../auth/firebaseConfig';
 import { useNavigate } from "react-router-dom";
+import { getChatIds } from "../services/geminiService";
 
 const AdvisorChatPage = () => {
+  const timestamp = Date.now().toString();
+
   const [messages, setMessages] = useState([]);
-  const [currentChatId, setCurrentChatId] = useState(1);
-  const [chats, setChats] = useState([{ id: 1, text: "New Chat" }]);
-  const [chatId, setChatId] = useState(1);
+  const [currentChatId, setCurrentChatId] = useState(timestamp);
+  const [chats, setChats] = useState([{ id: timestamp, text: "New Chat" }]);
 
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
@@ -19,12 +21,29 @@ const AdvisorChatPage = () => {
     navigate("/");
   }
 
-  const startNewChat = () => {
-    const prevChatId = chatId;
-    setChatId(prevChatId + 1);
+  useEffect(() => {
+    const loadChats = async() => {
+      if (chats.length === 1) {
+        const response = await getChatIds("advisor");
+        const chatIds = response.chat_ids;
+        console.log("Chat Ids: ", chatIds);
 
-    const newChat = { id: prevChatId + 1, text: "New Chat"};
-    setCurrentChatId(prevChatId + 1);
+        const newChats = [];
+        chatIds.forEach((chatId) => newChats.push({ id: chatId, text: chatId }));
+        newChats.push(chats[0]);
+
+        setChats(newChats);
+      }
+    }
+    
+    loadChats();
+  }, []);
+
+  const startNewChat = () => {
+    const newChatId = Date.now().toString();
+
+    const newChat = { id: newChatId, text: "New Chat"};
+    setCurrentChatId(newChatId);
     setMessages([]);
 
     const newChats = [newChat, ...chats];
@@ -48,6 +67,7 @@ const AdvisorChatPage = () => {
       <ChatSidebar 
         startNewChat={startNewChat} 
         chats={chats} 
+        setChats={setChats}
         currentChatId={currentChatId} 
         setCurrentChatId={setCurrentChatId}
       />

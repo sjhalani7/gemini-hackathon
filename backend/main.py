@@ -14,9 +14,6 @@ API_KEY = config.API_KEY
 genai.configure(api_key=API_KEY)
 chat_hist = {}
 
-advisor_chat_ids = []
-tutor_chat_ids = []
-
 next_id = 0
 
 model = genai.GenerativeModel('gemini-1.5-flash')
@@ -126,7 +123,7 @@ def process_history(chat_session_history_obj):
 def initialize_model():
     data = request.get_json()
     mode = data.get("mode")
-    chat_id = data.get("chat_id")
+    chat_id = str(data.get("chat_id"))
 
     if not mode:
         return jsonify({"error": "Mode not provided"}), 400
@@ -197,5 +194,5 @@ def get_all_chat_ids():
         return jsonify({"error": str(e)}), 500
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
