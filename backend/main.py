@@ -70,7 +70,7 @@ def create_prompt(path_to_file, mode='tutor'):
             i+=1
 
         initial_prompt = f"""
-                    You are an advanced language model serving as a virtual assistant for professors during office hours. You have been provided with the following material which includes lecture slides, notes, and other educational content:
+                            You are an advanced language model serving as a virtual assistant for professors during office hours. You have been provided with the following material which includes lecture slides, notes, and other educational content. The lectures are being fed to you one by one, denoted by " Here is the text for Lecture [number]":
 
                     "{material_text}"
 
@@ -133,9 +133,10 @@ def initialize_model():
     
     if chat_id not in chat_hist:
         if mode == 'advisor':
-            path_to_file = "files/courses_offered.pdf"
+            path_to_file = f"files/courses_offered.pdf"  # Assuming the file is already in the backend
         else:
-            path_to_file = "files/CSCI-183" #TODO: fix this logic
+            class_folder = data.get('class')
+            path_to_file = f"files/{class_folder}"  # TODO: fix this logic
 
         prompt = create_prompt(path_to_file, mode)
         chat_session = init_prompt_llm(prompt)
