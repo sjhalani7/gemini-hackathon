@@ -47,12 +47,13 @@ const sendQuery = async (query, chat_id) => {
   }
 };
 
-const getChatHistory = async (chat_id) => {
+const getChatHistory = async (chat_id, mode) => {
   try {
     console.log("Getting chat history...");
     console.log("Chat id: ", chat_id);
+    console.log("Mode: ", mode);
 
-    const response = await api.get(`/chat-history?chat_id=${chat_id}`);
+    const response = await api.get(`/chat-history?chat_id=${chat_id}&mode=${mode}`);
     console.log('History Response:', response.data);
 
     return response.data; // Return the response data
@@ -62,6 +63,22 @@ const getChatHistory = async (chat_id) => {
     throw error;
   }
 };
+
+const getChatIds = async (mode) => {
+  try {
+    console.log("Getting chat ids...");
+    console.log("Mode: ", mode);
+
+    const response = await api.get(`/chat-ids?mode=${mode}`);
+    console.log('Response:', response.data);
+
+    return response.data; // Return the response data
+
+  } catch (error) {
+    console.error('Error making GET request:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+}
 
 const getNextId = async() => {
   try {
@@ -74,4 +91,4 @@ const getNextId = async() => {
 
 
 
-export { initialize, sendQuery, getChatHistory };
+export { initialize, sendQuery, getChatHistory, getChatIds };

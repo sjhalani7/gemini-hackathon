@@ -1,10 +1,10 @@
 import React from 'react'
 import ChatSessionButton from './ChatSessionButton'
 
-const ChatSidebar = ({ startNewChat, chats, currentChatId, setCurrentChatId }) => {
+const ChatSidebar = ({ startNewChat, chats, setChats, currentChatId, setCurrentChatId }) => {  
   return (
     <div className='sidebar flex flex-col justify-between'>
-      <div className='px-3 py-2 flex flex-col items-start'>
+      <div className='px-3 py-2 flex flex-col items-start overflow-y-scroll'>
         <p className='font-bold p-2 my-1'>Recent Chats</p>
         {chats.map((chat) => 
           <ChatSessionButton 

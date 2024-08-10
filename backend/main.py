@@ -14,9 +14,6 @@ API_KEY = config.API_KEY
 genai.configure(api_key=API_KEY)
 chat_hist = {}
 
-advisor_chat_ids = []
-tutor_chat_ids = []
-
 next_id = 0
 
 model = genai.GenerativeModel('gemini-1.5-flash')
@@ -126,7 +123,7 @@ def process_history(chat_session_history_obj):
 def initialize_model():
     data = request.get_json()
     mode = data.get("mode")
-    chat_id = data.get("chat_id")
+    chat_id = str(data.get("chat_id"))
 
     if not mode:
         return jsonify({"error": "Mode not provided"}), 400
@@ -136,7 +133,6 @@ def initialize_model():
             path_to_file = "files/courses_offered.pdf"
         else:
             path_to_file = "files/CSCI-183" #TODO: fix this logic
-
         prompt = create_prompt(path_to_file, mode)
         chat_session = init_prompt_llm(prompt)
         chat_hist[chat_id] = chat_session
@@ -196,5 +192,5 @@ def get_all_chat_ids():
         return jsonify({"error": str(e)}), 500
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
