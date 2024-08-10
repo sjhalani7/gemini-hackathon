@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../auth/firebaseConfig';
 import { useNavigate } from "react-router-dom";
-import { getChatIds } from "../services/geminiService";
+import { getChatHistory, getChatIds } from "../services/geminiService";
 
 const AdvisorChatPage = () => {
   const timestamp = Date.now().toString();
@@ -29,7 +29,16 @@ const AdvisorChatPage = () => {
         console.log("Chat Ids: ", chatIds);
 
         const newChats = [];
-        chatIds.forEach((chatId) => newChats.push({ id: chatId, text: chatId }));
+        chatIds.forEach(async(chatId) => {
+          const response = await getChatHistory(chatId, "advisor");
+          const history = response.history;
+          const chatHistory = JSON.parse(history).history;
+
+          console.log("Chat id: ", chatId);
+          console.log("Chat history: ", chatHistory);
+
+          newChats.push({ id: chatId, text: chatHistory[3].text });
+        });
         newChats.push(chats[0]);
 
         setChats(newChats);
