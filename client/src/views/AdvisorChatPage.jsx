@@ -55,7 +55,7 @@ const AdvisorChatPage = () => {
     setCurrentChatId(newChatId);
     setMessages([]);
 
-    const newChats = [newChat, ...chats];
+    const newChats = [...chats, newChat];
     setChats(newChats);
   }
 
