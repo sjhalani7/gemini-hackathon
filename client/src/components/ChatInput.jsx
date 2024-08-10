@@ -22,7 +22,7 @@ const ChatInput = ( { handleSubmit } ) => {
   }
 
   return (
-    <div className="chat-input-container flex flex-row items-center justify-between w-1/2 p-1 my-2">
+    <div className="chat-input-container flex flex-row items-center justify-between w-3/5 p-1 my-2">
       <input 
         type="text" 
         className="chat-input grow mx-5 p-1"

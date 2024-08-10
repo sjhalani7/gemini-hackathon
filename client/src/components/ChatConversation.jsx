@@ -10,7 +10,7 @@ const ChatConversation = ({ messages, loading }) => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col items-center w-1/2 overflow-y-scroll">
+    <div className="flex flex-col items-center w-3/5 overflow-y-scroll">
       {messages.map((message, index) => (
         <ChatMessage key={index} message={message} />
       ))}
