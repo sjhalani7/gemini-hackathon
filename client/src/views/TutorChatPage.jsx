@@ -4,13 +4,15 @@ import ChatSidebar from "../components/ChatSidebar"
 import Navbar from "../components/Navbar"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../auth/firebaseConfig';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const TutorChatPage = () => {
+  const location = useLocation();
+  const course = location.state?.course;
+
   const [messages, setMessages] = useState([]);
-  const [currentChatId, setCurrentChatId] = useState(100);
-  const [chats, setChats] = useState([{ id: 100, text: "New Chat" }]);
-  const [chatId, setChatId] = useState(100);
+  const [currentChatId, setCurrentChatId] = useState(course);
+  const [chats, setChats] = useState([{ id: course, text: "New Chat" }]);
 
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
@@ -20,15 +22,7 @@ const TutorChatPage = () => {
   }
 
   const startNewChat = () => {
-    const prevChatId = chatId;
-    setChatId(prevChatId + 1);
-
-    const newChat = { id: prevChatId + 1, text: "New Chat"};
-    setCurrentChatId(prevChatId + 1);
-    setMessages([]);
-
-    const newChats = [newChat, ...chats];
-    setChats(newChats);
+    navigate('/course-selection');
   }
 
   const setInitialText = (id, text) => {

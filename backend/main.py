@@ -168,7 +168,10 @@ def ask_model():
 @app.route('/chat-history', methods=['GET'])
 def return_chat_history():
     chat_id = request.args.get('chat_id')
-    chat_id = int(chat_id)
+
+    if chat_id.isdigit():
+        chat_id = int(chat_id)
+        
     print("Chat id: ", chat_id)
 
     if not chat_id or chat_id not in chat_hist:

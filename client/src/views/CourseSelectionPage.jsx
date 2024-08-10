@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../styles/CourseSelection.css";
 import { useNavigate } from "react-router-dom";
-import { initialize } from "../services/geminiService";
 import Navbar from "../components/Navbar";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../auth/firebaseConfig';
@@ -43,10 +42,9 @@ const CourseSelectionPage = () => {
     course.toLowerCase().includes(inputValue.toLowerCase())
   );
 
-  const handleClick = () => {
-    navigate("/tutor-chat");
-    initialize("tutor");
-  }
+  const handleClick = (course) => {
+    navigate("/tutor-chat", { state: { course } });
+  };  
 
   return (
     <div className="flex flex-col w-full h-full overflow-hidden">
@@ -68,7 +66,7 @@ const CourseSelectionPage = () => {
         </div>
         <div className="course-list flex flex-col w-1/2 h-1/2 mb-24">
           {filteredCourses.map((course, index) => (
-            <button key={index} className="course-item w-full p-2 mb-2" onClick={handleClick}>
+            <button key={index} className="course-item w-full p-2 mb-2" onClick={() => handleClick(course)}>
               {course}
             </button>
           ))}
