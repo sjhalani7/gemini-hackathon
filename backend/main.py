@@ -14,6 +14,9 @@ API_KEY = config.API_KEY
 genai.configure(api_key=API_KEY)
 chat_hist = {}
 
+advisor_chat_ids = []
+tutor_chat_ids = []
+
 next_id = 0
 
 model = genai.GenerativeModel('gemini-1.5-flash')
@@ -126,34 +129,31 @@ def initialize_model():
     chat_id = data.get("chat_id")
 
     if not mode:
-        print("Error: Mode not found")
         return jsonify({"error": "Mode not provided"}), 400
     
     if chat_id not in chat_hist:
         if mode == 'advisor':
-            path_to_file = "files/courses_offered.pdf"  # Assuming the file is already in the backend
+            path_to_file = "files/courses_offered.pdf"
         else:
             path_to_file = "files/CSCI-183" #TODO: fix this logic
+
         prompt = create_prompt(path_to_file, mode)
         chat_session = init_prompt_llm(prompt)
         chat_hist[chat_id] = chat_session
-        print(f"Initialized chat with id: {chat_id}")
 
-        firebase.add_id_to_db(str(chat_id))
+        firebase.add_id_to_db(str(chat_id), mode)
         return jsonify({"chat_id": chat_id, "message": "Model initialized successfully."})
     else:
-        print(f"Chat already initialized with id: {chat_id}")
         return jsonify({"chat_id": chat_id, "message": "Model already initialized."})
 
 @app.route('/ask', methods=['POST'])
 def ask_model():
     data = request.get_json()
-    print("Request Data:", data)
     chat_id = data.get('chat_id')
     query = data.get('query')
+    mode = data.get('mode')
 
     if not chat_id or chat_id not in chat_hist:
-        print("Error: Chat session not found")
         return jsonify({"error": "Chat session not found."}), 400
 
     if not query:
@@ -162,29 +162,38 @@ def ask_model():
     chat_session = chat_hist.get(chat_id)
     response = send_question_to_model(chat_session, query)
 
-    firebase.update_history(str(chat_id), process_history(chat_session.history))
+    firebase.update_history(str(chat_id), process_history(chat_session.history), mode)
     return jsonify({"response": response})
 
 @app.route('/chat-history', methods=['GET'])
 def return_chat_history():
     chat_id = request.args.get('chat_id')
+    mode = request.args.get('mode')
 
-    if chat_id.isdigit():
-        chat_id = int(chat_id)
-        
     print("Chat id: ", chat_id)
+    print("Mode: ", mode)
 
-    if not chat_id or chat_id not in chat_hist:
-        print("Error: Chat session not found")
-        return jsonify({"error": "Chat session not found."}), 400
+    return jsonify(firebase.get_data_from_db(str(chat_id), str(mode)))
 
-    return jsonify(firebase.get_data_from_db(str(chat_id)))
 
 @app.route('/next-id', methods=['GET'])
 def return_next_id():
     global next_id
     next_id += 1
     return jsonify(next_id)
+
+@app.route('/chat-ids', methods=['GET'])
+def get_all_chat_ids():
+    mode = request.args.get('mode')
+
+    if not mode:
+        return jsonify({"error": "Mode is required."}), 400
+
+    try:
+        chat_ids = firebase.get_all_chat_ids(mode)
+        return jsonify({"chat_ids": chat_ids})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == '__main__':

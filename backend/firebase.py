@@ -7,24 +7,32 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-def add_id_to_db(chat_id):
-    doc_ref = db.collection('chat-hist').document(chat_id)
-    doc = doc_ref.get()
+def get_collection_ref(mode):
+    if mode == 'advisor':
+        return db.collection('chat-hist-advisor')
+    else:
+        return db.collection('chat-hist-tutor')
+
+def add_id_to_db(chat_id, mode):
+    collection_ref = get_collection_ref(mode)
+    doc_ref = collection_ref.document(chat_id)
     data = {
         'history': 'NULL'
     }
     doc_ref.set(data)
 
-def update_history(chat_id, history):
-    doc_ref = db.collection('chat-hist').document(chat_id)
+def update_history(chat_id, history, mode):
+    collection_ref = get_collection_ref(mode)
+    doc_ref = collection_ref.document(chat_id)
     doc = doc_ref.get()
     if doc.exists:
         doc_ref.update({'history': history})
     else:
         raise Exception("Chat_id does not exist")
 
-def get_data_from_db(chat_id):
-    doc_ref = db.collection('chat-hist').document(chat_id)
+def get_data_from_db(chat_id, mode):
+    collection_ref = get_collection_ref(mode)
+    doc_ref = collection_ref.document(chat_id)
     doc = doc_ref.get()
 
     if doc.exists:
@@ -33,5 +41,10 @@ def get_data_from_db(chat_id):
     else:
         return(f'ChatID {chat_id} does not exist.')
 
-
-
+def get_all_chat_ids(mode):
+    collection_name = f'chat-hist-{mode}'
+    chat_ids = []
+    docs = db.collection(collection_name).stream()
+    for doc in docs:
+        chat_ids.append(doc.id)
+    return chat_ids
