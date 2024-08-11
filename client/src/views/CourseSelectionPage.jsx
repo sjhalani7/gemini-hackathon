@@ -8,8 +8,29 @@ import { auth } from '../auth/firebaseConfig';
 const CourseSelectionPage = ({ startNewChat }) => {
   const [courses, setCourses] = useState([
     "CSCI 183 - Data Science",
-    "HIST 30 - Introduction to the French Revolution"
+    "HIST 30 - Introduction to the French Revolution",
+    "MATH 101 - Calculus I",
+    "PHYS 201 - General Physics I",
+    "ENGL 110 - Introduction to Literature",
+    "CHEM 210 - Organic Chemistry",
+    "BIOL 150 - Principles of Biology",
+    "ECON 101 - Microeconomics",
+    "PSYC 101 - Introduction to Psychology",
+    "PHIL 120 - Ethics and Moral Philosophy",
+    "ART 105 - History of Art",
+    "SOCI 101 - Introduction to Sociology",
+    "ANTH 102 - Cultural Anthropology",
+    "MUSC 101 - Music Appreciation",
+    "POLI 150 - International Relations",
+    "STAT 200 - Statistics for Social Sciences",
+    "CSCI 200 - Algorithms and Data Structures",
+    "LING 101 - Introduction to Linguistics",
+    "GEOG 101 - World Geography",
+    "HIST 101 - World History I",
+    "ASTR 101 - Introduction to Astronomy",
+    "BUS 101 - Principles of Management"
   ]);
+  
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
 
