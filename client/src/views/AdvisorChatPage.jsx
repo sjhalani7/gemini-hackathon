@@ -34,9 +34,6 @@ const AdvisorChatPage = () => {
           const history = response.history;
           const chatHistory = JSON.parse(history).history;
 
-          console.log("Chat id: ", chatId);
-          console.log("Chat history: ", chatHistory);
-
           newChats.push({ id: chatId, text: chatHistory[3].text });
         });
         newChats.push(chats[0]);
@@ -82,7 +79,7 @@ const AdvisorChatPage = () => {
       />
       <div className="flex flex-col w-full h-full">
         <Navbar backLink="/gemini-selection"/>
-        <ChatSection messages={messages} setMessages={setMessages} mode="advisor" chatId={currentChatId} setInitialText={setInitialText}/>
+        <ChatSection messages={messages} setMessages={setMessages} mode="advisor" chatId={currentChatId} setInitialText={setInitialText} course=""/>
       </div>
     </div>
   )

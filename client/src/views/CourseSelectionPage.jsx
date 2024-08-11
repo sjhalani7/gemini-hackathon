@@ -5,26 +5,10 @@ import Navbar from "../components/Navbar";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../auth/firebaseConfig';
 
-const CourseSelectionPage = () => {
+const CourseSelectionPage = ({ startNewChat }) => {
   const [courses, setCourses] = useState([
-    "CSEN 122 - Computer Architecture",
-    "CSEN 161 - Web Dev",
-    "CSEN 171 - Programming Languages",
-    "CSEN 122 - Computer Architecture",
-    "CSEN 161 - Web Dev",
-    "CSEN 171 - Programming Languages",
-    "CSEN 122 - Computer Architecture",
-    "CSEN 161 - Web Dev",
-    "CSEN 171 - Programming Languages",
-    "CSEN 122 - Computer Architecture",
-    "CSEN 161 - Web Dev",
-    "CSEN 171 - Programming Languages",
-    "CSEN 122 - Computer Architecture",
-    "CSEN 161 - Web Dev",
-    "CSEN 171 - Programming Languages",
-    "CSEN 122 - Computer Architecture",
-    "CSEN 161 - Web Dev",
-    "CSEN 171 - Programming Languages",
+    "CSCI 183 - Data Science",
+    "HIST 30 - Introduction to the French Revolution"
   ]);
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
@@ -41,10 +25,6 @@ const CourseSelectionPage = () => {
   const filteredCourses = courses.filter((course) =>
     course.toLowerCase().includes(inputValue.toLowerCase())
   );
-
-  const handleClick = (course) => {
-    navigate("/tutor-chat", { state: { course } });
-  };  
 
   return (
     <div className="flex flex-col w-full h-full overflow-hidden">
@@ -66,7 +46,7 @@ const CourseSelectionPage = () => {
         </div>
         <div className="course-list flex flex-col w-1/2 h-1/2 mb-24">
           {filteredCourses.map((course, index) => (
-            <button key={index} className="course-item w-full p-2 mb-2" onClick={() => handleClick(course)}>
+            <button key={index} className="course-item w-full p-2 mb-2" onClick={() => startNewChat(course)}>
               {course}
             </button>
           ))}

@@ -1,18 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ChatSection from "../components/ChatSection"
 import ChatSidebar from "../components/ChatSidebar"
 import Navbar from "../components/Navbar"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../auth/firebaseConfig';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import CourseSelectionPage from "./CourseSelectionPage";
 
 const TutorChatPage = () => {
-  const location = useLocation();
-  const course = location.state?.course;
-
   const [messages, setMessages] = useState([]);
-  const [currentChatId, setCurrentChatId] = useState(course);
-  const [chats, setChats] = useState([{ id: course, text: "New Chat" }]);
+  const [currentChatId, setCurrentChatId] = useState(null);
+  const [chats, setChats] = useState([]);
 
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
@@ -21,8 +19,45 @@ const TutorChatPage = () => {
     navigate("/");
   }
 
+  useEffect(() => {
+    const loadChats = async() => {
+      if (chats.length === 1) {
+        const response = await getChatIds("tutor");
+        const chatIds = response.chat_ids;
+        console.log("Chat Ids: ", chatIds);
+
+        const newChats = [];
+        await Promise.all(chatIds.map(async(chatId) => {
+          const response = await getChatHistory(chatId, "tutor");
+          const history = response.history;
+          const chatHistory = JSON.parse(history).history;
+
+          newChats.push({ id: chatId, text: chatHistory[3].text });
+        }));
+        newChats.push(chats[0]);
+
+        setChats(newChats);
+      }
+    }
+    
+    //loadChats();
+  }, []);
+
   const startNewChat = () => {
-    navigate('/course-selection');
+    setCurrentChatId(null);
+    setMessages([]);
+  }
+
+  const handleCourseClick = (course) => {
+    const newChatId = course.toString();
+    console.log("Starting new chat with course: ", newChatId)
+
+    const newChat = { id: newChatId, text: newChatId };
+    setCurrentChatId(newChatId);
+    setMessages([]);
+
+    const newChats = [...chats, newChat];
+    setChats(newChats);
   }
 
   const setInitialText = (id, text) => {
@@ -37,6 +72,10 @@ const TutorChatPage = () => {
     setChats(newChats);
   }
 
+  if (!currentChatId) {
+    return <CourseSelectionPage startNewChat={handleCourseClick} />;
+  }
+
   return (
     <div className="flex flex-row w-full h-full">
       <ChatSidebar 
@@ -46,11 +85,18 @@ const TutorChatPage = () => {
         setCurrentChatId={setCurrentChatId}
       />
       <div className="flex flex-col w-full h-full">
-        <Navbar backLink="/course-selection"/>
-        <ChatSection messages={messages} setMessages={setMessages} mode="tutor" chatId={currentChatId} setInitialText={setInitialText}/>
+        <Navbar backLink="/gemini-selection" />
+        <ChatSection 
+          messages={messages} 
+          setMessages={setMessages} 
+          mode="tutor" 
+          chatId={currentChatId} 
+          setInitialText={setInitialText} 
+          course={currentChatId}
+        />
       </div>
     </div>
   )
 }
 
-export default TutorChatPage
+export default TutorChatPage;

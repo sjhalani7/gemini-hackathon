@@ -26,7 +26,7 @@ const GeminiSelectionPage = () => {
           title="Gemini Tutor"
           iconName="school"
           desc="Chat with Gemini to ask questions about class material"
-          path="/course-selection"
+          path="/tutor-chat"
         />
       </div>
     </div>

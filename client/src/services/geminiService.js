@@ -11,13 +11,14 @@ const api = axios.create({
   }
 });
 
-const initialize = async (mode, chat_id) => {
+const initialize = async (mode, chat_id, course) => {
   try {
     console.log("Initializing...");
     console.log("Mode: ", mode);
     console.log("Chat id: ", chat_id);
+    console.log("Course: ", course);
 
-    const response = await api.post("/initialize", { mode, chat_id });
+    const response = await api.post("/initialize", { mode, chat_id, class: course });
     console.log('Initialization Response:', response.data);
     console.log('Cookies after initialization:', document.cookie); // Log cookies
   } catch (error) {
@@ -25,7 +26,7 @@ const initialize = async (mode, chat_id) => {
   }
 };
 
-const sendQuery = async (query, chat_id) => {
+const sendQuery = async (query, chat_id, mode) => {
   try {
     if (chat_id === null) {
       console.error('Error: Chat ID is not initialized.');
@@ -35,8 +36,9 @@ const sendQuery = async (query, chat_id) => {
     console.log("Sending query...");
     console.log("Chat id: ", chat_id);
     console.log("Query:", query);
+    console.log("Mode: ", mode)
 
-    const response = await api.post("/ask", { chat_id, query });
+    const response = await api.post("/ask", { chat_id, query, mode });
     console.log('Query Response:', response.data);
 
     return response.data; // Return the response data

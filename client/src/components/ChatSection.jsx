@@ -3,7 +3,7 @@ import ChatConversation from "./ChatConversation";
 import ChatInput from "./ChatInput";
 import { getChatHistory, initialize, sendQuery } from "../services/geminiService";
 
-const ChatSection = ({ messages, setMessages, mode, chatId, setInitialText }) => {
+const ChatSection = ({ messages, setMessages, mode, chatId, setInitialText, course }) => {
   const [loading, setLoading] = useState(false);
   let initialSetupDone = false;
 
@@ -12,12 +12,12 @@ const ChatSection = ({ messages, setMessages, mode, chatId, setInitialText }) =>
       if (!initialSetupDone) {
         initialSetupDone = true;
 
-        await initialize(mode, chatId);
+        await initialize(mode, chatId, course);
 
         const response = await getChatHistory(chatId, mode);
         console.log("Response: ", response);
         const history = response.history;
-        
+
         if (history === 'NULL') {
           await handleSubmit("Hello, what can you help me with?");
         } else {
@@ -65,7 +65,7 @@ const ChatSection = ({ messages, setMessages, mode, chatId, setInitialText }) =>
 
     // Call the backend service and wait for the response
     try {
-      const response = await sendQuery(inputValue, chatId);
+      const response = await sendQuery(inputValue, chatId, mode);
       // Add the response message to the state
       setMessages((prevMessages) => [
         ...prevMessages,

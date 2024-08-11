@@ -22,6 +22,7 @@ def add_id_to_db(chat_id, mode):
     doc_ref.set(data)
 
 def update_history(chat_id, history, mode):
+    print("Mode: ", mode)
     collection_name = 'chat-hist-tutor' if mode == 'tutor' else 'chat-hist-advisor'
     doc_ref = db.collection(collection_name).document(chat_id)
     doc = doc_ref.get()
