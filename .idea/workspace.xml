@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8e0f9ad-dc1a-43fc-b6ac-96b0723fb7b3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/firebase.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/firebase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChatSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChatSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ChatSidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ChatSidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/services/geminiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/geminiService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/AdvisorChatPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/AdvisorChatPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CourseSelectionPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CourseSelectionPage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
