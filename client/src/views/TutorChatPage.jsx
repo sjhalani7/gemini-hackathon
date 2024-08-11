@@ -69,7 +69,7 @@ const TutorChatPage = () => {
       }
     })
 
-    setChats(newChats);
+    // setChats(newChats);
   }
 
   if (!currentChatId) {
