@@ -29,6 +29,17 @@ To get started with Gem.edu, you’ll need the following:
 - Firebase Admin SDK and credentials
 - Google Gemini API Key and credentials
 
+### 📚 Libraries and Installation Commands
+
+- **Flask**: `pip install Flask`
+- **Flask-CORS**: `pip install flask-cors`
+- **Google Generative AI (genai)**: `pip install google-generativeai`
+- **PyMuPDF (fitz)**: `pip install pymupdf`
+- **Firebase Admin SDK**: `pip install firebase-admin`
+- **firebase**: `pip install firebase`
+- **os**: (part of Python standard library, no installation required)
+- **json**: (part of Python standard library, no installation required)
+
 
 ### Installation
 
@@ -46,7 +57,7 @@ To get started with Gem.edu, you’ll need the following:
 
 3. **Install dependencies**:
     ```bash
-    pip install [library-name]
+    pip install [library-name] #for the required dependencies
     ```
 
    1. **Set up environment variables**:
