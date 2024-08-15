@@ -57,18 +57,18 @@ Navigate to the /backend directory:
 cd backend
 ```
 
-**Set up a virtual environment**:
+Set up a virtual environment:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-**Install dependencies**:
+Install dependencies:
 ```bash
 pip install [library-name] #for the required dependencies
 ```
 
-**Set up environment variables**:  
+Set up environment variables:  
   - For the backend: 
     - Replace the `cred` variable in the `firebase.py` file with the path to your serviceKey to the firebase database. 
     - Create a `config.py` file in the `backend` directory of the project and add your environment variables:
@@ -76,11 +76,11 @@ pip install [library-name] #for the required dependencies
 API_KEY=your-secret-key #in the config.py file
 ```
 
-**Run the backend**:
-    ```bash
-   export FLASK_APP=main.py
-    flask run
-    ```
+Run the backend:
+```bash
+export FLASK_APP=main.py
+flask run
+```
 
 3. **Set up the frontend**:  
 Navigate to the /client directory:
@@ -88,12 +88,12 @@ Navigate to the /client directory:
 cd ../client
 ```
 
-**Install frontend dependencies**:
+Install frontend dependencies:
 ```bash
 npm install
 ```
 
-**Run the frontend**:
+Run the frontend:
 ```bash
 npm run dev
 ```
