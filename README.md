@@ -50,30 +50,31 @@ To get started with Gem.edu, you’ll need the following:
     cd gem-edu
     ```
 
-2. **Set up the backend**:
-Navigate to the /backend directory:
+2. **Set up the backend**:  
+
+Navigate to the /backend directory:  
 ```bash
 cd backend
 ```
 
 **Set up a virtual environment**:
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
 **Install dependencies**:
-    ```bash
-    pip install [library-name] #for the required dependencies
-    ```
+```bash
+pip install [library-name] #for the required dependencies
+```
 
-**Set up environment variables**:
-       - For the backend: 
-         - Replace the `cred` variable in the `firebase.py` file with the path to your serviceKey to the firebase database. 
-         - Create a `config.py` file in the `backend` directory of the project and add your environment variables:
-       ```bash
-       API_KEY=your-secret-key #in the config.py file
-       ```
+**Set up environment variables**:  
+  - For the backend: 
+    - Replace the `cred` variable in the `firebase.py` file with the path to your serviceKey to the firebase database. 
+    - Create a `config.py` file in the `backend` directory of the project and add your environment variables:
+```bash
+API_KEY=your-secret-key #in the config.py file
+```
 
 **Run the backend**:
     ```bash
@@ -81,7 +82,7 @@ cd backend
     flask run
     ```
 
-3. **Set up the frontend**:
+3. **Set up the frontend**:  
 Navigate to the /client directory:
 ```bash
 cd ../client
