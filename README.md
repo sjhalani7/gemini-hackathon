@@ -24,6 +24,7 @@ Want to see Gem.edu in action? Check out our demo video here: [YouTube Demo Vide
 
 To get started with Gem.edu, you’ll need the following:
 
+- Node.js
 - Python 3.x
 - Flask
 - Firebase Admin SDK and credentials
@@ -49,31 +50,55 @@ To get started with Gem.edu, you’ll need the following:
     cd gem-edu
     ```
 
-2. **Set up a virtual environment**:
+2. **Set up the backend**:
+Navigate to the /backend directory:
+```bash
+cd backend
+```
+
+**Set up a virtual environment**:
     ```bash
     python3 -m venv venv
     source venv/bin/activate
     ```
 
-3. **Install dependencies**:
+**Install dependencies**:
     ```bash
     pip install [library-name] #for the required dependencies
     ```
 
-   1. **Set up environment variables**:
+**Set up environment variables**:
        - For the backend: 
          - Replace the `cred` variable in the `firebase.py` file with the path to your serviceKey to the firebase database. 
          - Create a `config.py` file in the `backend` directory of the project and add your environment variables:
        ```bash
        API_KEY=your-secret-key #in the config.py file
        ```
-      
 
-4. **Run the backend**:
+**Run the backend**:
     ```bash
    export FLASK_APP=main.py
     flask run
     ```
+
+3. **Set up the frontend**:
+Navigate to the /client directory:
+```bash
+cd ../client
+```
+
+**Install frontend dependencies**:
+```bash
+npm install
+```
+
+**Run the frontend**:
+```bash
+npm run dev
+```
+
+Your front-end application should now be running at http://localhost:3000
+
 
 ## 🛠️ Features
 
