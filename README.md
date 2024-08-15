@@ -83,6 +83,7 @@ flask run
 ```
 
 3. **Set up the frontend**:  
+
 Navigate to the /client directory:
 ```bash
 cd ../client
