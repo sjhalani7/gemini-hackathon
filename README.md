@@ -16,7 +16,7 @@ Gem.edu is a personalized teacher and advisor outside of the classroom, providin
 
 ## 🎥 Demo
 
-Want to see Gem.edu in action? Check out our demo video here: [YouTube Demo Video]([https://youtube.com/project](https://www.youtube.com/watch?v=BVtw-ZKlJEM))
+Want to see Gem.edu in action? Check out our demo video here: [YouTube Demo Video](https://www.youtube.com/watch?v=BVtw-ZKlJEM)
 
 ## 🚀 Getting Started
 
